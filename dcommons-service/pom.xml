@@ -11,10 +11,10 @@
 
     <packaging>pom</packaging>
 
-    <artifactId>dcommons-rom</artifactId>
+    <artifactId>dcommons-service</artifactId>
 
     <modules>
-        <module>dcommons-service</module>
+        <module>dcommons-service-rom-jpa</module>
     </modules>
 
     <properties>
