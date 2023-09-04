@@ -1,2 +1,15 @@
-# Project exclude paths
-/dcommons-rom/dcommons-service/target/
+/out
+/logs
+.idea/
+*.iml
+target/
+overlays/
+tmp/
+.command
+*.log
+*.lnk
+*.orig
+*.ini
+node_modules/
+.bowerrc
+/classes
