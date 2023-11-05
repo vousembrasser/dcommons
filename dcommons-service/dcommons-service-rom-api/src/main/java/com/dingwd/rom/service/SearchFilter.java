@@ -1,4 +1,4 @@
-package com.dingwd.dcommons.rom.jpa;
+package com.dingwd.rom.service;
 
 import org.springframework.util.StringUtils;
 

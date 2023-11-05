@@ -1,5 +1,6 @@
 package com.dingwd.dcommons.rom.jpa;
 
+import com.dingwd.rom.service.SearchFilter;
 import jakarta.persistence.criteria.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
@@ -51,7 +52,6 @@ public class DynamicSpecifications {
                         return builder.and(predicates.toArray(new Predicate[predicates.size()]));
                     }
                 }
-
                 return builder.conjunction();
             }
         };

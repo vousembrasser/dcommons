@@ -1,5 +1,7 @@
 package com.dingwd.dcommons.rom.jpa;
 
+import com.dingwd.rom.service.SearchFilter;
+
 import java.util.ArrayList;
 import java.util.List;
 

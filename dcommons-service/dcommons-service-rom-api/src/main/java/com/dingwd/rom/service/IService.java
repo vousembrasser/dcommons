@@ -1,4 +1,4 @@
-package com.dingwd.dcommons.rom;
+package com.dingwd.rom.service;
 
 
 import org.springframework.data.domain.Page;

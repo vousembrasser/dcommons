@@ -1,6 +1,6 @@
 package com.dingwd.dcommons.rom.jpa;
 
-import com.dingwd.dcommons.rom.IRomService;
+import com.dingwd.rom.service.IRomService;
 import jakarta.inject.Inject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -9,10 +9,11 @@ import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
 
-public abstract class BaserRomService<Model, Entity, ID, R extends BaseRepository<Entity, ID>> implements IRomService<Model, Entity, ID> {
+public abstract class BaserRomService<Model, Entity, ID> implements IRomService<Model, Entity, ID> {
 
     @Inject
-    R dao;
+    private BaseRepository<Entity,ID> dao;
+
 
     public abstract Entity model2Entity(Model model);
 

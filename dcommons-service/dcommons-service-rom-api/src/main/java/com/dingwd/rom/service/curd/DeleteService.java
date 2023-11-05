@@ -1,4 +1,4 @@
-package com.dingwd.dcommons.rom.curd;
+package com.dingwd.rom.service.curd;
 
 public interface DeleteService<ID> {
 
@@ -15,9 +15,4 @@ public interface DeleteService<ID> {
    * @param ids 主键集合
    */
   void delete(Iterable<ID> ids);
-
-  /**
-   * 清空表数据
-   */
-  void clear();
  }

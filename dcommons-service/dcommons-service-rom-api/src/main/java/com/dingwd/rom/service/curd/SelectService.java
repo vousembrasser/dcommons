@@ -1,6 +1,6 @@
-package com.dingwd.dcommons.rom.curd;
+package com.dingwd.rom.service.curd;
 
-import com.dingwd.dcommons.rom.jpa.SearchFilter;
+import com.dingwd.rom.service.SearchFilter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;

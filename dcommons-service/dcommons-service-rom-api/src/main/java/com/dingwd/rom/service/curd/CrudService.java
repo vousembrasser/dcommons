@@ -1,4 +1,4 @@
-package com.dingwd.dcommons.rom.curd;
+package com.dingwd.rom.service.curd;
 
 
 import java.io.Serializable;
