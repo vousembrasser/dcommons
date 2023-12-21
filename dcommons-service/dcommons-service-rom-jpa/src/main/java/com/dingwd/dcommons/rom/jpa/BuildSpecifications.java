@@ -1,5 +1,7 @@
 package com.dingwd.dcommons.rom.jpa;
 
+import com.dingwd.dcommons.rom.util.CFunction;
+import com.dingwd.dcommons.rom.util.ConvertUtil;
 import com.dingwd.rom.service.SearchFilter;
 
 import java.util.ArrayList;
@@ -26,6 +28,14 @@ public class BuildSpecifications {
         list.add(new SearchFilter(fieldName, operator, value));
         return this;
     }
+
+    public <T> BuildSpecifications add(CFunction<T, ?> getFunction, SearchFilter.Operator operator, Object value) {
+        list.add(new SearchFilter(ConvertUtil.convertToFieldName(getFunction), operator, value));
+        return this;
+    }
+
+
+
 
 
     public List<SearchFilter> done() {

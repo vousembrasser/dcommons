@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class SearchFilter {
     public enum Operator {
-        EQ, LIKE_ALL, GT, LT, GTE, LTE, IN, IS_NULL, IS_NOTNULL
+        EQ, LIKE_ALL, LIKE_RIGHT, GT, LT, GTE, LTE, IN, IS_NULL, IS_NOTNULL
     }
 
     public String fieldName;

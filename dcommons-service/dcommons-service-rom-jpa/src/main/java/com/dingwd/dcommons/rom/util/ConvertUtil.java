@@ -1,6 +1,8 @@
 package com.dingwd.dcommons.rom.util;
 
 
+import org.springframework.util.StringUtils;
+
 import java.io.Serializable;
 import java.lang.invoke.SerializedLambda;
 import java.lang.reflect.InvocationTargetException;
@@ -95,7 +97,7 @@ public class ConvertUtil {
      * @return 转换好的字符串
      */
     public static String firstToLowerCase(final String str) {
-        if (null == str || str.length() == 0) {
+        if (!StringUtils.hasText(str)) {
             return "";
         }
         return str.substring(0, 1).toLowerCase() + str.substring(1);
