@@ -1,9 +1,9 @@
 package com.dingwd.rom.service.query;
 
-import java.util.List;
+import java.util.Collection;
 
 record in<T>(String attributeName, T... value) {
-    @SafeVarargs
-    public in {
-    }
+}
+
+record inList<T>(String attributeName, Collection<T> value) {
 }

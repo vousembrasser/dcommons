@@ -1,5 +1,7 @@
 package com.dingwd.rom.service.query;
 
+import com.dingwd.rom.service.util.CFunction;
+import com.dingwd.rom.service.util.ConvertUtil;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
@@ -17,7 +19,8 @@ public class QueryBuild {
     private List<lte> lteList = null;
     private List<between> betweenList = null;
     private List<likeRight> likeRightList = null;
-    private List<in> inList = null;
+    private List<in> inArray = null;
+    private List<inList> inList = null;
 
 
     public static QueryBuild build() {
@@ -37,7 +40,8 @@ public class QueryBuild {
         predicates.addAll(getPredicates(lteList, (tuples) -> builder.lessThanOrEqualTo(root.get(tuples.attributeName()), tuples.value())));
         predicates.addAll(getPredicates(betweenList, (tuples) -> builder.between(root.get(tuples.attributeName()), tuples.x(), tuples.y())));
         predicates.addAll(getPredicates(likeRightList, (tuples) -> builder.like(root.get(tuples.attributeName()), tuples.value())));
-        predicates.addAll(getPredicates(inList, (tuples) ->  root.get(tuples.attributeName()).in(tuples.value())));
+        predicates.addAll(getPredicates(inArray, (tuples) -> root.get(tuples.attributeName()).in(tuples.value())));
+        predicates.addAll(getPredicates(inList, (tuples) -> root.get(tuples.attributeName()).in(tuples.value())));
         return builder.and(predicates.toArray(new Predicate[0]));
     }
 
@@ -49,6 +53,46 @@ public class QueryBuild {
                         .map(mapper)
                         .toList())
                 .orElse(Collections.emptyList());
+    }
+
+    public <T> QueryBuild isNull(CFunction<T, ?> fieldFun) {
+        return this.isNull(ConvertUtil.convertToFieldName(fieldFun));
+    }
+
+    public <T> QueryBuild equal(CFunction<T, ?> fieldFun, T value) {
+        return this.equal(ConvertUtil.convertToFieldName(fieldFun), value);
+    }
+
+    public <T extends Comparable<? super T>> QueryBuild gt(CFunction<T, ?> fieldFun, T value) {
+        return this.gt(ConvertUtil.convertToFieldName(fieldFun), value);
+    }
+
+    public <T extends Comparable<? super T>> QueryBuild gte(CFunction<T, ?> fieldFun, T value) {
+        return this.gte(ConvertUtil.convertToFieldName(fieldFun), value);
+    }
+
+    public <T extends Comparable<? super T>> QueryBuild lt(CFunction<T, ?> fieldFun, T value) {
+        return this.lt(ConvertUtil.convertToFieldName(fieldFun), value);
+    }
+
+    public <T extends Comparable<? super T>> QueryBuild lte(CFunction<T, ?> fieldFun, T value) {
+        return this.lte(ConvertUtil.convertToFieldName(fieldFun), value);
+    }
+
+    public <T extends Comparable<? super T>> QueryBuild between(CFunction<T, ?> fieldFun, T x, T y) {
+        return this.between(ConvertUtil.convertToFieldName(fieldFun), x, y);
+    }
+
+    public <T> QueryBuild likeRight(CFunction<T, ?> fieldFun, String value) {
+        return this.likeRight(ConvertUtil.convertToFieldName(fieldFun), value);
+    }
+
+    public final <T> QueryBuild in(CFunction<T, ?> fieldFun, T... value) {
+        return this.in(ConvertUtil.convertToFieldName(fieldFun), value);
+    }
+
+    public final <T> QueryBuild in(CFunction<T, ?> fieldFun, Collection<T> value) {
+        return this.in(ConvertUtil.convertToFieldName(fieldFun), value);
     }
 
 
@@ -116,12 +160,19 @@ public class QueryBuild {
         return this;
     }
 
-    @SafeVarargs
     public final <T> QueryBuild in(String attributeName, T... value) {
+        if (inArray == null) {
+            inArray = new ArrayList<>();
+        }
+        inArray.add(new in<>(attributeName, value));
+        return this;
+    }
+
+    public final <T> QueryBuild in(String attributeName, Collection<T> value) {
         if (inList == null) {
             inList = new ArrayList<>();
         }
-        inList.add(new in<>(attributeName, Arrays.stream(value).toList()));
+        inList.add(new inList<>(attributeName, value));
         return this;
     }
 

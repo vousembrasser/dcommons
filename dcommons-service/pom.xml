@@ -15,7 +15,6 @@
 
     <modules>
         <module>dcommons-service-rom-jpa</module>
-        <module>dcommonse-service-redis</module>
         <module>dcommons-service-rom-api</module>
     </modules>
 
