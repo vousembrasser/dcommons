@@ -1,6 +1,5 @@
 package com.dingwd.rom.service.curd;
 
-import com.dingwd.rom.service.SearchFilter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -34,35 +33,35 @@ public interface SelectService <T, ID> {
       * @return 获取分页结果
       */
 
-     Page<T> queryPage(List<SearchFilter> filters , PageRequest pageRequest);
-
-     /**
-      * 根据多个条件查询列表数据
-      * @param filters
-      * @return
-      */
-     List<T> queryAll(List<SearchFilter> filters);
-
-     /**
-      * 根据多个条件查询列表数据，并排序
-      * @param filters
-      * @param sort
-      * @return
-      */
-     List<T> queryAll(List<SearchFilter> filters, Sort sort);
-
-     /**
-      * 根据的单个条件查询列表数据
-      * @param filter
-      * @return
-      */
-     List<T> queryAll(SearchFilter filter);
-
-     /**
-      * 根据的单个条件查询列表数据
-      * @param filter
-      * @param sort
-      * @return
-      */
-     List<T> queryAll(SearchFilter filter,Sort sort);
+//     Page<T> queryPage(List<SearchFilter> filters , PageRequest pageRequest);
+//
+//     /**
+//      * 根据多个条件查询列表数据
+//      * @param filters
+//      * @return
+//      */
+//     List<T> queryAll(List<SearchFilter> filters);
+//
+//     /**
+//      * 根据多个条件查询列表数据，并排序
+//      * @param filters
+//      * @param sort
+//      * @return
+//      */
+//     List<T> queryAll(List<SearchFilter> filters, Sort sort);
+//
+//     /**
+//      * 根据的单个条件查询列表数据
+//      * @param filter
+//      * @return
+//      */
+//     List<T> queryAll(SearchFilter filter);
+//
+//     /**
+//      * 根据的单个条件查询列表数据
+//      * @param filter
+//      * @param sort
+//      * @return
+//      */
+//     List<T> queryAll(SearchFilter filter,Sort sort);
  }

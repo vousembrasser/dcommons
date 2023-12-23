@@ -1,30 +1,32 @@
-package com.dingwd.dcommons.rom.jpa;
+package com.dingwd.rom.service;
 
+import com.dingwd.rom.service.IBaseRepository;
 import com.dingwd.rom.service.IRomService;
+import com.dingwd.rom.service.query.QueryBuild;
 import jakarta.inject.Inject;
+import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.domain.Specification;
 
 import java.util.List;
 
 public abstract class BaserRomService<Model, Entity, ID> implements IRomService<Model, Entity, ID> {
 
     @Inject
-    private BaseRepository<Entity,ID> dao;
-
+    private IBaseRepository<Entity, ID> dao;
 
     public abstract Entity model2Entity(Model model);
 
     public abstract List<Entity> model2Entity(List<Model> model);
 
-
     public abstract Model entity2Model(Entity entity);
 
     public abstract List<Model> entity2Model(List<Entity> entity);
 
-    public abstract Specification<Entity> query(Model model);
+    public abstract QueryBuild query(Model model);
+
+//    public abstract Specification<Entity> query(Model model);
 
     @Override
     public Model insert(Model model) {
@@ -74,7 +76,6 @@ public abstract class BaserRomService<Model, Entity, ID> implements IRomService<
     public Page<Model> page(Model model, Pageable pageable) {
         Page<Entity> entityPage = dao.findAll(query(model), pageable);
         List<Entity> list = entityPage.stream().toList();
-        Page<Model> modelPage = new PageImpl<>(entity2Model(list), pageable, entityPage.getTotalElements());
-        return modelPage;
+        return new PageImpl<>(entity2Model(list), pageable, entityPage.getTotalElements());
     }
 }
