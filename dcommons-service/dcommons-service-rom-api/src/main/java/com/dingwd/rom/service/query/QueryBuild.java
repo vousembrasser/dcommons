@@ -55,43 +55,43 @@ public class QueryBuild {
                 .orElse(Collections.emptyList());
     }
 
-    public <T> QueryBuild isNull(CFunction<T, ?> fieldFun) {
+    public <Field> QueryBuild isNull(CFunction<Field, ?> fieldFun) {
         return this.isNull(ConvertUtil.convertToFieldName(fieldFun));
     }
 
-    public <T> QueryBuild equal(CFunction<T, ?> fieldFun, T value) {
+    public <T,Field> QueryBuild equal(CFunction<Field, ?> fieldFun, T value) {
         return this.equal(ConvertUtil.convertToFieldName(fieldFun), value);
     }
 
-    public <T extends Comparable<? super T>> QueryBuild gt(CFunction<T, ?> fieldFun, T value) {
+    public <T extends Comparable<? super T>,Field> QueryBuild gt(CFunction<Field, ?> fieldFun, T value) {
         return this.gt(ConvertUtil.convertToFieldName(fieldFun), value);
     }
 
-    public <T extends Comparable<? super T>> QueryBuild gte(CFunction<T, ?> fieldFun, T value) {
+    public <T extends Comparable<? super T>,Field> QueryBuild gte(CFunction<Field, ?> fieldFun, T value) {
         return this.gte(ConvertUtil.convertToFieldName(fieldFun), value);
     }
 
-    public <T extends Comparable<? super T>> QueryBuild lt(CFunction<T, ?> fieldFun, T value) {
+    public <T extends Comparable<? super T>,Field> QueryBuild lt(CFunction<Field, ?> fieldFun, T value) {
         return this.lt(ConvertUtil.convertToFieldName(fieldFun), value);
     }
 
-    public <T extends Comparable<? super T>> QueryBuild lte(CFunction<T, ?> fieldFun, T value) {
+    public <T extends Comparable<? super T>,Field> QueryBuild lte(CFunction<Field, ?> fieldFun, T value) {
         return this.lte(ConvertUtil.convertToFieldName(fieldFun), value);
     }
 
-    public <T extends Comparable<? super T>> QueryBuild between(CFunction<T, ?> fieldFun, T x, T y) {
+    public <T extends Comparable<? super T>,Field> QueryBuild between(CFunction<Field, ?> fieldFun, T x, T y) {
         return this.between(ConvertUtil.convertToFieldName(fieldFun), x, y);
     }
 
-    public <T> QueryBuild likeRight(CFunction<T, ?> fieldFun, String value) {
+    public <Field> QueryBuild likeRight(CFunction<Field, ?> fieldFun, String value) {
         return this.likeRight(ConvertUtil.convertToFieldName(fieldFun), value);
     }
 
-    public final <T> QueryBuild in(CFunction<T, ?> fieldFun, T... value) {
+    public final <T,Field> QueryBuild in(CFunction<Field, ?> fieldFun, T... value) {
         return this.in(ConvertUtil.convertToFieldName(fieldFun), value);
     }
 
-    public final <T> QueryBuild in(CFunction<T, ?> fieldFun, Collection<T> value) {
+    public final <T,Field> QueryBuild in(CFunction<Field, ?> fieldFun, Collection<T> value) {
         return this.in(ConvertUtil.convertToFieldName(fieldFun), value);
     }
 
