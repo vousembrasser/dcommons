@@ -1,4 +1,18 @@
 package com.dingwd.rom.service.query;
 
-record lte<T extends Comparable<? super T>>(String attributeName, T value) {
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.Predicate;
+import jakarta.persistence.criteria.Root;
+import org.springframework.util.StringUtils;
+
+record lte<T extends Comparable<? super T>, Y>(String attributeName, T value) implements Condition<Y> {
+    @Override
+    public boolean isValid() {
+        return StringUtils.hasLength(attributeName) && value != null;
     }
+
+    @Override
+    public Predicate toPredicate(CriteriaBuilder builder, Root<Y> root) {
+        return builder.lessThanOrEqualTo(root.get(attributeName), value);
+    }
+}
