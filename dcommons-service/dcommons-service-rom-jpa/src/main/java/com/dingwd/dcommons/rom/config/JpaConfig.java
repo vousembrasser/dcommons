@@ -10,8 +10,4 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @EnableJpaRepositories(basePackages = "com.dingwd", repositoryBaseClass = BaseRepositoryImpl.class)
 public class JpaConfig {
 
-    @Bean
-    public void Test() {
-        System.out.println("JpaConfig=======================");
-    }
 }
