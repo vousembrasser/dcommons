@@ -32,8 +32,12 @@ public class ConvertUtil {
      */
     private static final Map<Class<?>, String> CLASS_FIELD_META_MAP = new ConcurrentHashMap<>();
 
-    public static <T> String convertToFieldName(CFunction<T, ?> fn) {
+    public static <T> String convertToDbFieldName(CFunction<T, ?> fn) {
         return convertToFieldName(FieldKindEnum.UNDERLINE, fn);
+    }
+
+    public static <T> String convertToClassFieldName(CFunction<T, ?> fn) {
+        return convertToFieldName(FieldKindEnum.HUMP, fn);
     }
 
     /**
