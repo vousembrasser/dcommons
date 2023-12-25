@@ -1,13 +1,11 @@
 package com.dingwd.rom.service;
 
-import com.dingwd.rom.service.IBaseRepository;
-import com.dingwd.rom.service.IRomService;
 import com.dingwd.rom.service.query.QueryBuild;
 import jakarta.inject.Inject;
-import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.util.Assert;
 
 import java.util.List;
 
@@ -28,26 +26,29 @@ public abstract class BaserRomService<Model, Entity, ID> implements IRomService<
 
     public abstract QueryBuild query(Model model);
 
-//    public abstract Specification<Entity> query(Model model);
-
     @Override
     public Model insert(Model model) {
-        Entity entity = model2Entity(model);
+        Entity entity = model2Entity(model, null);
         entity = dao.saveAndFlush(entity);
-        return entity2Model(entity);
+        return entity2Model(entity, model);
     }
 
     @Override
-    public List<Model> inserts(List<Model> model) {
-        List<Entity> entity = model2Entity(model);
-        return entity2Model(dao.saveAllAndFlush(entity));
+    public List<Model> inserts(List<Model> models) {
+        for (Model model : models) {
+            Assert.notNull(model, "The given entity must not be null!");
+            Entity entity = model2Entity(model, null);
+            entity = dao.saveAndFlush(entity);
+            entity2Model(entity, model);
+        }
+        return models;
     }
 
     @Override
-    public boolean update(Model model) {
-        Entity entity = model2Entity(model);
-        dao.saveAndFlush(entity);
-        return true;
+    public Model update(Model model) {
+        Entity entity = model2Entity(model, null);
+        entity = dao.updateById(entity);
+        return entity2Model(entity, model);
     }
 
     @Override

@@ -98,6 +98,18 @@ public class BaseRepositoryImpl<T, ID> extends SimpleJpaRepository<T, ID> implem
         return pageable.isUnpaged() ? new PageImpl<>(query.getResultList()) : readPage(query, domainClass, pageable, predicates);
     }
 
+    @Transactional
+    @Override
+    public <S extends T> S updateById(S entity) {
+
+        Assert.notNull(entity, "Entity must not be null");
+        Assert.notNull(entityInformation.getId(entity),"Entity id must not be null");
+
+        S result = entityManager.merge(entity);
+        flush();
+        return result;
+    }
+
     protected Page<T> readPage(TypedQuery<T> query, final Class<T> domainClass, Pageable pageable,
                                QueryBuild predicates) {
 

@@ -1,7 +1,6 @@
 package com.dingwd.rom.service;
 
 import com.dingwd.rom.service.query.QueryBuild;
-import jakarta.persistence.criteria.Predicate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.NoRepositoryBean;
@@ -25,4 +24,5 @@ public interface IBaseRepository<T, ID> extends Repository<T, ID> {
 
     Page<T> findAll(QueryBuild predicates, Pageable pageable);
 
+    <S extends T> S updateById(S entity);
 }

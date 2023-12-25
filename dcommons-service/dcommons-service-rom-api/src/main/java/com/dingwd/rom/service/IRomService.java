@@ -7,11 +7,11 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 
-public interface IRomService<Model,Entity,ID> {
+public interface IRomService<Model, Entity, ID> {
 
-    Entity model2Entity(Model model,Entity source);
+    Entity model2Entity(Model model, Entity source);
 
-    Model entity2Model(Entity entity,Model source);
+    Model entity2Model(Entity entity, Model source);
 
     List<Model> entity2Model(List<Entity> entity);
 
@@ -26,7 +26,7 @@ public interface IRomService<Model,Entity,ID> {
     /**
      * 更新对象
      */
-    boolean update(Model model);
+    Model update(Model model);
 
     /**
      * 删除对象
