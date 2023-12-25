@@ -16,11 +16,13 @@ public abstract class BaserRomService<Model, Entity, ID> implements IRomService<
     @Inject
     private IBaseRepository<Entity, ID> dao;
 
-    public abstract Entity model2Entity(Model model);
+    public <T extends IBaseRepository<Entity, ID>> T getDao() {
+        return (T) dao;
+    }
 
-    public abstract List<Entity> model2Entity(List<Model> model);
+    public abstract Entity model2Entity(Model model, Entity source);
 
-    public abstract Model entity2Model(Entity entity);
+    public abstract Model entity2Model(Entity entity, Model source);
 
     public abstract List<Model> entity2Model(List<Entity> entity);
 
@@ -51,7 +53,7 @@ public abstract class BaserRomService<Model, Entity, ID> implements IRomService<
     @Override
     public boolean delete(ID id) {
         dao.deleteById(id);
-        return false;
+        return true;
     }
 
     @Override
@@ -63,7 +65,7 @@ public abstract class BaserRomService<Model, Entity, ID> implements IRomService<
     @Override
     public Model get(ID id) {
         Entity entity = dao.getReferenceById(id);
-        return entity2Model(entity);
+        return entity2Model(entity, null);
     }
 
     @Override

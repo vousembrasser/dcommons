@@ -9,12 +9,9 @@ import java.util.List;
 
 public interface IRomService<Model,Entity,ID> {
 
-    Entity model2Entity(Model model);
+    Entity model2Entity(Model model,Entity source);
 
-    List<Entity> model2Entity(List<Model> model);
-
-
-    Model entity2Model(Entity entity);
+    Model entity2Model(Entity entity,Model source);
 
     List<Model> entity2Model(List<Entity> entity);
 
