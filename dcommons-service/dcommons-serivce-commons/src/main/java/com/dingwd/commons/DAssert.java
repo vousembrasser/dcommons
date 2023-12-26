@@ -5,8 +5,7 @@ import com.dingwd.commons.messages.DErrorMessage;
 import com.dingwd.commons.validator.IPAddressValidator;
 import com.dingwd.commons.validator.MailValidator;
 
-public class DAssert extends RuntimeException {
-    private static final long serialVersionUID = -7034897190745766939L;
+public class DAssert {
 
     public static void notNil(Object param) {
         if (param == null) {
