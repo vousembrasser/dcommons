@@ -2,8 +2,8 @@ package com.dingwd.commons;
 
 import com.dingwd.commons.exceptions.DParamException;
 import com.dingwd.commons.messages.DErrorMessage;
-import com.dingwd.commons.validator.IPAddressValidator;
-import com.dingwd.commons.validator.MailValidator;
+import com.dingwd.commons.validator.ip.IPAddressValidator;
+import com.dingwd.commons.validator.mail.MailValidator;
 
 public class DAssert {
 

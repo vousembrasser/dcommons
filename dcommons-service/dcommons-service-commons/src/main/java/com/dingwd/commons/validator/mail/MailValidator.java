@@ -1,4 +1,4 @@
-package com.dingwd.commons.validator;
+package com.dingwd.commons.validator.mail;
 
 import com.dingwd.commons.exceptions.DParamException;
 import com.dingwd.commons.messages.DErrorMessage;

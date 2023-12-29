@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>dcommons-serivce-commons</artifactId>
+    <artifactId>dcommons-service-commons</artifactId>
 
     <dependencies>
         <dependency>

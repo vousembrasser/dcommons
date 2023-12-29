@@ -1,4 +1,4 @@
-package com.dingwd.commons.validator;
+package com.dingwd.commons.validator.ip;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
