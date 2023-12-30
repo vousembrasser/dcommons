@@ -1,15 +1,19 @@
 package com.dingwd.commons;
 
+import com.dingwd.commons.exceptions.DServiceException;
 import com.dingwd.commons.exceptions.DParamException;
 import com.dingwd.commons.messages.DErrorMessage;
-import com.dingwd.commons.validator.ip.IPAddressValidator;
 import com.dingwd.commons.validator.mail.MailValidator;
 
 public class DAssert {
 
     public static void notNil(Object param) {
+        notNil(param, DErrorMessage.IP_ERROR.IP_INVALID);
+    }
+
+    public static <T extends DErrorMessage> void notNil(Object param, T message) {
         if (param == null) {
-            throw new DParamException(DErrorMessage.PARAM_ERROR.IS_NULL);
+            throw new DParamException(message);
         }
     }
 
@@ -25,22 +29,6 @@ public class DAssert {
         }
     }
 
-    public static void isIpV4(String ip, IPAddressValidator.IPType... ipTypes) {
-
-        if (ipTypes == null) {
-            throw new DErrorService(DErrorMessage.SERVICE.SERVICE_ERROR);
-        }
-
-        if (ip == null || ip.isBlank()) {
-            throw new DParamException(DErrorMessage.PARAM_ERROR.IS_NULL);
-        }
-
-        for (IPAddressValidator.IPType ipType : ipTypes) {
-            if (!IPAddressValidator.validIp(ip, ipType)) {
-                throw new DParamException(DErrorMessage.IP_ERROR.IP_INVALID);
-            }
-        }
-    }
 
     public static void isEmail(String mail) {
         if (mail == null || mail.isBlank()) {
@@ -54,10 +42,10 @@ public class DAssert {
     private static <T extends DErrorMessage> void isTrue(CheckFunction checkFunction, T message) {
         try {
             if (!checkFunction.execute()) {
-                throw new DParamException(message.toString());
+                throw new DParamException(message);
             }
         } catch (Throwable throwable) {
-            throw new DErrorService(throwable);
+            throw new DServiceException(throwable);
         }
     }
 }

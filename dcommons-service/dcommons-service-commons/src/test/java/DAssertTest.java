@@ -54,4 +54,6 @@ public class DAssertTest {
     public void isEmailShouldNotThrowExceptionWhenParamIsValidEmail() {
         DAssert.isEmail("valid@email.com.cn");
     }
+
+
 }

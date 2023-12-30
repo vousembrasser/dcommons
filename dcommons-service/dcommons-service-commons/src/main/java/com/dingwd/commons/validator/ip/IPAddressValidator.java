@@ -1,59 +1,43 @@
 package com.dingwd.commons.validator.ip;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.dingwd.commons.nums.ip.IPFormatTypeEnum;
+import com.dingwd.commons.nums.ip.IPTypeEnum;
 
 public class IPAddressValidator {
 
-   public enum IPType {
-        SINGLE_IP,
-        CIDR,
-        IP_RANGE
+    /**
+     * @param ip     1.1.1.1 或者1.1.1.1/32
+     * @param ipType ip类型
+     * @return true or false
+     */
+    public static boolean isIp(String ip, IPTypeEnum ipType) {
+        boolean isIp = false;
+        switch (ipType) {
+            case IPv4 -> isIp = IPv4AddressValidator.isValidIPOrWithMask(ip);
+            case IPv6 -> isIp = IPv6AddressValidator.isValidIPOrWithMask(ip);
+        }
+        return isIp;
     }
 
-    private static final String IP_REGEX =
-            "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
+    public static boolean isIp(String ip, IPTypeEnum ipType, IPFormatTypeEnum formatType) {
 
-    private static final String CIDR_REGEX =
-            "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(\\d{1,2})$";
-
-    private static final String IP_RANGE_REGEX =
-            "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)-" +
-                    "((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$";
-
-    public static boolean validIp(String ip, IPType ipType) {
-        return switch (ipType) {
-            case SINGLE_IP -> isValidIP(ip);
-            case CIDR -> isValidCIDR(ip);
-            case IP_RANGE -> isValidIPRange(ip);
-        };
-    }
-
-    public static boolean isValidIP(String ip) {
-        Pattern pattern = Pattern.compile(IP_REGEX);
-        Matcher matcher = pattern.matcher(ip);
-        return matcher.matches();
-    }
-
-    public static boolean isValidCIDR(String ipWithMask) {
-        Pattern pattern = Pattern.compile(CIDR_REGEX);
-        Matcher matcher = pattern.matcher(ipWithMask);
-        return matcher.matches();
-    }
-
-    public static boolean isValidIPRange(String ipRange) {
-        Pattern pattern = Pattern.compile(IP_RANGE_REGEX);
-        Matcher matcher = pattern.matcher(ipRange);
-        return matcher.matches();
-    }
-
-    public static void main(String[] args) {
-        String singleIP = "192.168.0.1";
-        String ipWithMask = "0.168.255.1/64";
-        String ipRange = "192.168.0.1-192.168.0.10";
-
-        System.out.println("Is valid single IP: " + isValidIP(singleIP));
-        System.out.println("Is valid IP with CIDR: " + isValidCIDR(ipWithMask));
-        System.out.println("Is valid IP range: " + isValidIPRange(ipRange));
+        boolean isIp = false;
+        switch (ipType) {
+            case IPv4 -> {
+                switch (formatType) {
+                    case SINGLE -> isIp = IPv4AddressValidator.isValidSingleIP(ip);
+                    case MARK -> isIp = IPv4AddressValidator.isValidIPWithMask(ip);
+                    case RANGE -> isIp = IPv4AddressValidator.isValidIPRange(ip);
+                }
+            }
+            case IPv6 -> {
+                switch (formatType) {
+                    case SINGLE -> isIp = IPv6AddressValidator.isValidSingleIP(ip);
+                    case MARK -> isIp = IPv6AddressValidator.isValidIPWithMask(ip);
+                    case RANGE -> isIp = IPv6AddressValidator.isValidIPRange(ip);
+                }
+            }
+        }
+        return isIp;
     }
 }

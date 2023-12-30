@@ -1,15 +1,16 @@
 package com.dingwd.commons.exceptions;
 
-public class DParamException extends RuntimeException{
+import com.dingwd.commons.messages.DErrorMessage;
 
-private static final long serialVersionUID = -7034897190745766939L;
+public class DParamException extends RuntimeException {
+
 
     public DParamException() {
         super();
     }
 
-    public DParamException(String message) {
-        super(message);
+    public <T extends DErrorMessage> DParamException(T message) {
+        super(message.getMessage());
     }
 
     public DParamException(String message, Throwable cause) {
@@ -21,8 +22,8 @@ private static final long serialVersionUID = -7034897190745766939L;
     }
 
     protected DParamException(String message, Throwable cause,
-            boolean enableSuppression,
-            boolean writableStackTrace) {
+                              boolean enableSuppression,
+                              boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 

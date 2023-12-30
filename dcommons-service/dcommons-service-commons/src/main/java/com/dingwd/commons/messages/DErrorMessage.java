@@ -1,20 +1,35 @@
 package com.dingwd.commons.messages;
 
+
+@FunctionalInterface
 public interface DErrorMessage {
 
-    interface IP_ERROR extends DErrorMessage {
-        String IP_INVALID = "ip.error.invalid";
+    String getMessage();
+
+    record MESSAGE(String message) implements DErrorMessage {
+        public String getMessage() {
+            System.out.println("========= " + message);
+            return message;
+        }
     }
 
-    interface PARAM_ERROR extends DErrorMessage {
-        String IS_NULL = "param.error.is.null";
-        String PARAM_IS_INVALID = "param.error.is.invalid";
+    interface IP_ERROR {
+        DErrorMessage IP_INVALID = new MESSAGE("ip.error.invalid");
 
-        String NO_TEXT = "param.error.no.text";
+    }
+
+
+    interface PARAM_ERROR extends DErrorMessage {
+        DErrorMessage IS_NULL = new MESSAGE("param.error.is.null");
+        DErrorMessage PARAM_IS_INVALID = new MESSAGE("param.error.is.invalid");
+
+        DErrorMessage NO_TEXT = new MESSAGE("param.error.no.text");
+
+        DErrorMessage ENUM_NOT_EXIST = new MESSAGE("enum.not.exist");
     }
 
     interface SERVICE extends DErrorMessage {
-        String SERVICE_ERROR = "service.error";
+        DErrorMessage SERVICE_ERROR = new MESSAGE("service.error");
     }
 
 }
