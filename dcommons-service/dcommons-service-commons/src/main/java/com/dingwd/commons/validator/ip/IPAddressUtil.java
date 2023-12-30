@@ -1,6 +1,6 @@
 package com.dingwd.commons.validator.ip;
 
-public class IPAddressUtil {
+class IPAddressUtil {
     private static final int INADDR4SZ = 4;
     private static final int INADDR16SZ = 16;
     private static final int INT16SZ = 2;
