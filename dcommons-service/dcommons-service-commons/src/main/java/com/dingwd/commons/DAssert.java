@@ -1,9 +1,9 @@
 package com.dingwd.commons;
 
-import com.dingwd.commons.exceptions.DServiceException;
 import com.dingwd.commons.exceptions.DParamException;
+import com.dingwd.commons.exceptions.DServiceException;
 import com.dingwd.commons.messages.DErrorMessage;
-import com.dingwd.commons.validator.mail.MailValidator;
+import com.dingwd.commons.validator.mail.ValidatorMail;
 
 public class DAssert {
 
@@ -29,23 +29,35 @@ public class DAssert {
         }
     }
 
+    public static void isDomain(String domain) {
+        if (domain == null || domain.isBlank()) {
+            throw new DParamException(DErrorMessage.PARAM_ERROR.NO_TEXT);
+        }
+    }
+
 
     public static void isEmail(String mail) {
         if (mail == null || mail.isBlank()) {
             throw new DParamException(DErrorMessage.PARAM_ERROR.IS_NULL);
         }
-        if (!MailValidator.isMail(mail)) {
+        if (!ValidatorMail.isMail(mail)) {
             throw new DParamException(DErrorMessage.PARAM_ERROR.PARAM_IS_INVALID);
         }
     }
 
-    private static <T extends DErrorMessage> void isTrue(CheckFunction checkFunction, T message) {
+    public static <T extends DErrorMessage> void isTrue(CheckFunction checkFunction, T message) {
         try {
             if (!checkFunction.execute()) {
                 throw new DParamException(message);
             }
         } catch (Throwable throwable) {
             throw new DServiceException(throwable);
+        }
+    }
+
+    public static <T extends DErrorMessage> void isTrue(Boolean expression, T message) {
+        if (!expression) {
+            throw new DServiceException(message);
         }
     }
 }

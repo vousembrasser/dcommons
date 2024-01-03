@@ -1,10 +1,16 @@
 package com.dingwd.commons.validator.ip;
 
-public class IPv4AddressValidator {
 
+import com.dingwd.commons.utils.ip.IPAddressUtil;
+
+import java.math.BigInteger;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
+public class ValidatorIPv6Address {
 
     public static boolean isValidSingleIP(String ip) {
-        return IPAddressUtil.isIPv4LiteralAddress(ip);
+        return IPAddressUtil.isIPv6LiteralAddress(ip);
     }
 
     public static boolean isValidIPWithMask(String ipWithMask) {
@@ -12,7 +18,6 @@ public class IPv4AddressValidator {
         if (parts.length != 2) {
             return false;
         }
-
 
         String ip = parts[0];
         String mask = parts[1];
@@ -28,7 +33,7 @@ public class IPv4AddressValidator {
             return false;
         }
 
-        return maskInt >= 0 && maskInt <= 32;
+        return maskInt >= 0 && maskInt <= 128;
     }
 
     public static boolean isValidIPRange(String ipRange) {
@@ -44,20 +49,15 @@ public class IPv4AddressValidator {
             return false;
         }
 
-        String[] startParts = ipStart.split("\\.");
-        String[] endParts = ipEnd.split("\\.");
-
-        for (int i = 0; i < 4; i++) {
-            int startPart = Integer.parseInt(startParts[i]);
-            int endPart = Integer.parseInt(endParts[i]);
-
-            if (startPart > endPart) {
-                return false;
-            } else if (startPart < endPart) {
-                return true;
-            }
+        BigInteger start, end;
+        try {
+            start = new BigInteger(1, InetAddress.getByName(ipStart).getAddress());
+            end = new BigInteger(1, InetAddress.getByName(ipEnd).getAddress());
+        } catch (UnknownHostException e) {
+            return false;
         }
-        return true;
+
+        return start.compareTo(end) > 0;
     }
 
     static boolean isValidIPOrWithMask(String singleIPOrIpWithMask) {
@@ -70,27 +70,27 @@ public class IPv4AddressValidator {
 
         if (haveMark) {
             String mask = parts[1];
-
             int maskInt;
             try {
                 maskInt = Integer.parseInt(mask);
             } catch (NumberFormatException e) {
                 return false;
             }
-            return maskInt >= 0 && maskInt <= 32;
+
+            return maskInt >= 0 && maskInt <= 128;
         }
         return true;
     }
 
     public static void main(String[] args) {
-        System.out.println(isValidSingleIP("192.168.0.1"));  // true
-        System.out.println(isValidSingleIP("invalid_ip"));  // false
-        System.out.println(isValidIPWithMask("192.168.0.1/24"));  // true
-        System.out.println(isValidIPWithMask("invalid_ip/24"));  // false
-        System.out.println(isValidIPRange("192.168.0.1-192.168.0.255"));  // true
-        System.out.println(isValidIPRange("invalid_ip-192.168.0.255"));  // false
+//        System.out.println(isValidSingleIP("2001:0db8:85a3:0000:0000:8a2e:0370:7334"));  // true
+//        System.out.println(isValidSingleIP("2001:db8:85a3::8a2e:370:7334"));  // true
+//        System.out.println(isValidSingleIP("invalid_ip"));  // false
+//        System.out.println(isValidIPWithMask("2001:db8:85a3::8a2e:370:7334/64"));  // true
+//        System.out.println(isValidIPWithMask("invalid_ip/64"));  // false
+//        System.out.println(isValidIPRange("2001:db8:85a3::8a2e:370:7334-2001:db8:85a3::8a2e:370:7335"));  // true
+//        System.out.println(isValidIPRange("invalid_ip-2001:db8:85a3::8a2e:370:7335"));  // false
 
-
+        System.out.println(IPAddressUtil.isIPv6LiteralAddress("2001:db8:85a3::8a2e:370:7334-2001:db8:85a3::8a2e:370:7335"));
     }
 }
-

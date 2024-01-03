@@ -3,7 +3,7 @@ package com.dingwd.commons.validator.ip;
 import com.dingwd.commons.nums.ip.IPFormatTypeEnum;
 import com.dingwd.commons.nums.ip.IPTypeEnum;
 
-public class IPAddressValidator {
+public class ValidatorIPAddress {
 
     /**
      * @param ip     1.1.1.1 或者1.1.1.1/32
@@ -13,8 +13,8 @@ public class IPAddressValidator {
     public static boolean isIp(String ip, IPTypeEnum ipType) {
         boolean isIp = false;
         switch (ipType) {
-            case IPv4 -> isIp = IPv4AddressValidator.isValidIPOrWithMask(ip);
-            case IPv6 -> isIp = IPv6AddressValidator.isValidIPOrWithMask(ip);
+            case IPv4 -> isIp = ValidatorIPv4Address.isValidIPOrWithMask(ip);
+            case IPv6 -> isIp = ValidatorIPv6Address.isValidIPOrWithMask(ip);
         }
         return isIp;
     }
@@ -25,16 +25,16 @@ public class IPAddressValidator {
         switch (ipType) {
             case IPv4 -> {
                 switch (formatType) {
-                    case SINGLE -> isIp = IPv4AddressValidator.isValidSingleIP(ip);
-                    case MARK -> isIp = IPv4AddressValidator.isValidIPWithMask(ip);
-                    case RANGE -> isIp = IPv4AddressValidator.isValidIPRange(ip);
+                    case SINGLE -> isIp = ValidatorIPv4Address.isValidSingleIP(ip);
+                    case MARK -> isIp = ValidatorIPv4Address.isValidIPWithMask(ip);
+                    case RANGE -> isIp = ValidatorIPv4Address.isValidIPRange(ip);
                 }
             }
             case IPv6 -> {
                 switch (formatType) {
-                    case SINGLE -> isIp = IPv6AddressValidator.isValidSingleIP(ip);
-                    case MARK -> isIp = IPv6AddressValidator.isValidIPWithMask(ip);
-                    case RANGE -> isIp = IPv6AddressValidator.isValidIPRange(ip);
+                    case SINGLE -> isIp = ValidatorIPv6Address.isValidSingleIP(ip);
+                    case MARK -> isIp = ValidatorIPv6Address.isValidIPWithMask(ip);
+                    case RANGE -> isIp = ValidatorIPv6Address.isValidIPRange(ip);
                 }
             }
         }

@@ -8,7 +8,6 @@ public interface DErrorMessage {
 
     record MESSAGE(String message) implements DErrorMessage {
         public String getMessage() {
-            System.out.println("========= " + message);
             return message;
         }
     }

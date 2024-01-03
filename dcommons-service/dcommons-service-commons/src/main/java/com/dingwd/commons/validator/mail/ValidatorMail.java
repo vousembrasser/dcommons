@@ -1,12 +1,9 @@
 package com.dingwd.commons.validator.mail;
 
-import com.dingwd.commons.exceptions.DParamException;
-import com.dingwd.commons.messages.DErrorMessage;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class MailValidator {
+public class ValidatorMail {
 
     private static final String regex = "^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$";
 
