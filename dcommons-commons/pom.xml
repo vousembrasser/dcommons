@@ -9,13 +9,12 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
+    <artifactId>dcommons-commons</artifactId>
     <packaging>pom</packaging>
 
-    <artifactId>dcommons-service</artifactId>
-
     <modules>
-        <module>dcommons-service-rom-jpa</module>
-        <module>dcommons-service-rom-api</module>
+        <module>dcommons-commons-validation</module>
+        <module>dcommons-commons-constant</module>
     </modules>
 
 </project>
