@@ -6,7 +6,7 @@
  */
 package com.dingwd.commons.constraints.domain;
 
-import com.dingwd.commons.constraints.domain.IsDomain.List;
+import com.dingwd.commons.constraints.domain.ValidatorIsDomain.List;
 import com.dingwd.commons.constraints.domain.validators.IsDomainValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -30,9 +30,9 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Repeatable(List.class)
 @Documented
 @Constraint(validatedBy = IsDomainValidator.class)
-public @interface IsDomain {
+public @interface ValidatorIsDomain {
 
-    String message() default "d.validator.error.notDomain";
+    String message() default "d.validator.error.domain";
 
     Class<?>[] groups() default {};
 
@@ -42,6 +42,6 @@ public @interface IsDomain {
     @Retention(RUNTIME)
     @Documented
     @interface List {
-        IsDomain[] value();
+        ValidatorIsDomain[] value();
     }
 }

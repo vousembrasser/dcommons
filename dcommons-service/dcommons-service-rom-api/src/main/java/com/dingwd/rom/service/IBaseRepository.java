@@ -21,6 +21,7 @@ public interface IBaseRepository<T, ID> extends Repository<T, ID> {
     T getReferenceById(ID var1);
 
     List<T> findAll(QueryBuild predicates);
+    List<T> findAll();
 
     Page<T> findAll(QueryBuild predicates, Pageable pageable);
 

@@ -1,7 +1,7 @@
 package com.dingwd.commons.constraints.domain.validators;
 
 import com.dingwd.commons.constraints.domain.GetErrorFieldInformation;
-import com.dingwd.commons.constraints.domain.IsDomain;
+import com.dingwd.commons.constraints.domain.ValidatorIsDomain;
 import com.dingwd.commons.validation.domain.ValidatorDomain;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
@@ -11,8 +11,7 @@ import jakarta.validation.ConstraintValidatorContext;
  *
  * @author Emmanuel Bernard
  */
-@GetErrorFieldInformation
-public class IsDomainValidator implements ConstraintValidator<IsDomain, Object> {
+public class IsDomainValidator implements ConstraintValidator<ValidatorIsDomain, Object> {
 
     @Override
     public boolean isValid(Object domain, ConstraintValidatorContext constraintValidatorContext) {

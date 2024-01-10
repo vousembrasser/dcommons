@@ -52,7 +52,7 @@ public class ValidatorString {
      * @return true or false
      */
     public static boolean lengthIn(String param, int min, int max) {
-        return param.length() >= min && param.length() < max;
+        return param.length() >= min && param.length() <= max;
     }
 
     /**
