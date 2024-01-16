@@ -9,21 +9,21 @@ import org.springframework.data.repository.Repository;
 import java.util.List;
 
 @NoRepositoryBean
-public interface IBaseRepository<T, ID> extends Repository<T, ID> {
-    <S extends T> S saveAndFlush(S entity);
+public interface IBaseRepository<DO, ID> extends Repository<DO, ID> {
+    <DOs extends DO> DOs saveAndFlush(DOs model);
 
-    <S extends T> List<S> saveAllAndFlush(Iterable<S> entities);
+    <DOs extends DO> List<DOs> saveAllAndFlush(Iterable<DOs> models);
 
     void deleteById(ID var1);
 
     void deleteAllById(Iterable<? extends ID> ids);
 
-    T getReferenceById(ID var1);
+    DO getReferenceById(ID id);
 
-    List<T> findAll(QueryBuild predicates);
-    List<T> findAll();
+    List<DO> findAll(QueryBuild predicates);
+    List<DO> findAll();
 
-    Page<T> findAll(QueryBuild predicates, Pageable pageable);
+    Page<DO> findAll(QueryBuild predicates, Pageable pageable);
 
-    <S extends T> S updateById(S entity);
+    <DOs extends DO> DOs updateById(DOs model);
 }

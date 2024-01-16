@@ -7,26 +7,26 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 
-public interface IRomService<VO, Entity, ID> {
+public interface IRomService<BO, DO, ID> {
 
-    Entity vo2Entity(VO vo, Entity source);
+    DO bo2DO(BO bo, DO source);
 
-    VO entity2VO(Entity entity, VO source);
+    BO model2BO(DO model, BO source);
 
-    List<VO> entity2VO(List<Entity> entity);
+    List<BO> model2BO(List<DO> model);
 
 
-    VO insert(VO vo);
+    BO insert(BO bo);
 
     /**
      * 批量插入 复用insert
      */
-    List<VO> inserts(List<VO> entities);
+    List<BO> inserts(List<BO> entities);
 
     /**
      * 更新对象
      */
-    VO update(VO vo);
+    BO update(BO bo);
 
     /**
      * 删除对象
@@ -45,13 +45,13 @@ public interface IRomService<VO, Entity, ID> {
     /**
      * 查询单个对象
      */
-    VO get(ID id);
+    BO get(ID id);
 
-    List<VO> list(VO vo);
+    List<BO> list(BO bo);
 
-    List<VO> list();
+    List<BO> list();
     /**
      * 查询分页方法
      */
-    Page<VO> page(VO vo, Pageable pageable);
+    Page<BO> page(BO bo, Pageable pageable);
 }

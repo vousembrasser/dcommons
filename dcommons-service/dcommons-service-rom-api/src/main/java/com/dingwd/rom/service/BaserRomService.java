@@ -9,46 +9,46 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 
-public abstract class BaserRomService<VO, Entity, ID> implements IRomService<VO, Entity, ID> {
+public abstract class BaserRomService<BO, DO, ID> implements IRomService<BO, DO, ID> {
 
     @Inject
-    private IBaseRepository<Entity, ID> dao;
+    private IBaseRepository<DO, ID> dao;
 
-    public <T extends IBaseRepository<Entity, ID>> T getDao() {
+    public <T extends IBaseRepository<DO, ID>> T getDao() {
         return (T) dao;
     }
 
-    public abstract Entity vo2Entity(VO vo, Entity source);
+    public abstract DO vo2DO(BO vo, DO source);
 
-    public abstract VO entity2VO(Entity entity, VO source);
+    public abstract BO model2BO(DO model, BO source);
 
-    public abstract List<VO> entity2VO(List<Entity> entity);
+    public abstract List<BO> model2BO(List<DO> model);
 
-    public abstract QueryBuild query(VO vo);
+    public abstract QueryBuild query(BO vo);
 
     @Override
-    public VO insert(VO vo) {
-        Entity entity = vo2Entity(vo, null);
-        entity = dao.saveAndFlush(entity);
-        return entity2VO(entity, vo);
+    public BO insert(BO vo) {
+        DO model = vo2DO(vo, null);
+        model = dao.saveAndFlush(model);
+        return model2BO(model, vo);
     }
 
     @Override
-    public List<VO> inserts(List<VO> vos) {
-        for (VO vo : vos) {
-            Assert.notNull(vo, "The given entity must not be null!");
-            Entity entity = vo2Entity(vo, null);
-            entity = dao.saveAndFlush(entity);
-            entity2VO(entity, vo);
+    public List<BO> inserts(List<BO> vos) {
+        for (BO vo : vos) {
+            Assert.notNull(vo, "The given model must not be null!");
+            DO model = vo2DO(vo, null);
+            model = dao.saveAndFlush(model);
+            model2BO(model, vo);
         }
         return vos;
     }
 
     @Override
-    public VO update(VO vo) {
-        Entity entity = vo2Entity(vo, null);
-        entity = dao.updateById(entity);
-        return entity2VO(entity, vo);
+    public BO update(BO vo) {
+        DO model = vo2DO(vo, null);
+        model = dao.updateById(model);
+        return model2BO(model, vo);
     }
 
     @Override
@@ -64,27 +64,27 @@ public abstract class BaserRomService<VO, Entity, ID> implements IRomService<VO,
     }
 
     @Override
-    public VO get(ID id) {
-        Entity entity = dao.getReferenceById(id);
-        return entity2VO(entity, null);
+    public BO get(ID id) {
+        DO model = dao.getReferenceById(id);
+        return model2BO(model, null);
     }
 
     @Override
-    public List<VO> list(VO vo) {
-        List<Entity> entities = dao.findAll(query(vo));
-        return entity2VO(entities);
+    public List<BO> list(BO vo) {
+        List<DO> entities = dao.findAll(query(vo));
+        return model2BO(entities);
     }
 
     @Override
-    public List<VO> list() {
-        List<Entity> entities = dao.findAll();
-        return entity2VO(entities);
+    public List<BO> list() {
+        List<DO> entities = dao.findAll();
+        return model2BO(entities);
     }
 
     @Override
-    public Page<VO> page(VO vo, Pageable pageable) {
-        Page<Entity> entityPage = dao.findAll(query(vo), pageable);
-        List<Entity> list = entityPage.stream().toList();
-        return new PageImpl<>(entity2VO(list), pageable, entityPage.getTotalElements());
+    public Page<BO> page(BO vo, Pageable pageable) {
+        Page<DO> modelPage = dao.findAll(query(vo), pageable);
+        List<DO> list = modelPage.stream().toList();
+        return new PageImpl<>(model2BO(list), pageable, modelPage.getTotalElements());
     }
 }
