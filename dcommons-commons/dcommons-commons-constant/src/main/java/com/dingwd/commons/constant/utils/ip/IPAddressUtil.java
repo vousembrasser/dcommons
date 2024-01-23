@@ -64,7 +64,7 @@ public class IPAddressUtil {
          *
          * We determine and parse the leading parts, if any, as single
          * byte values in one pass directly into the resulting byte[],
-         * then the remainder is treated as a 8-to-32-bit entity and
+         * then the remainder is treated as a 8-to-32-bit model and
          * translated into the remaining bytes in the array.
          */
         for (int i = 0; i < len; i++) {

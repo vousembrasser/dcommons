@@ -1,7 +1,6 @@
-package com.dingwd.commons.constraints.domain.validators;
+package com.dingwd.commons.constraints.validators;
 
-import com.dingwd.commons.constraints.domain.GetErrorFieldInformation;
-import com.dingwd.commons.constraints.domain.ValidatorIsDomain;
+import com.dingwd.commons.constraints.ValidatorIsDomain;
 import com.dingwd.commons.validation.domain.ValidatorDomain;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

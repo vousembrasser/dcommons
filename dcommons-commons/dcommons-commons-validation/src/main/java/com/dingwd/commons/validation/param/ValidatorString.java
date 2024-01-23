@@ -47,8 +47,8 @@ public class ValidatorString {
 
     /**
      * @param param 参数
-     * @param min   最小长度
-     * @param max   最大长度 -1
+     * @param min   参数长度 最小长度 包含
+     * @param max   参数长度 最大长度 包含
      * @return true or false
      */
     public static boolean lengthIn(String param, int min, int max) {
@@ -57,20 +57,49 @@ public class ValidatorString {
 
     /**
      * @param param 参数
-     * @param min   最小长度
+     * @param min   参数长度 大于等于
      * @return true or false
      */
     public static boolean lengthMin(String param, int min) {
-        return param.length() >= min;
+        return lengthMin(param, min, true);
+    }
+
+
+    /**
+     * @param param 参数
+     * @param min   参数 长度大于等于
+     * @param equal 是否相等
+     * @return true or false
+     */
+    public static boolean lengthMin(String param, int min, boolean equal) {
+        if (equal) {
+            return param.length() >= min;
+        } else {
+            return param.length() > min;
+        }
     }
 
     /**
      * @param param 参数
-     * @param max   最大长度
+     * @param max   小于等于 max
      * @return true or false
      */
     public static boolean lengthMax(String param, int max) {
-        return param.length() >= max;
+        return lengthMax(param, max, true);
+    }
+
+    /**
+     * @param param 参数
+     * @param max   小于等于 max
+     * @param equal 是否相等
+     * @return true or false
+     */
+    public static boolean lengthMax(String param, int max, boolean equal) {
+        if (equal) {
+            return param.length() <= max;
+        } else {
+            return param.length() < max;
+        }
     }
 
     /**

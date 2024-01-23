@@ -7,20 +7,20 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 
 
-public interface IService<DO, ID> {
+public interface IService<BO, ID> {
 
 
-    DO save(DO model);
+    BO save(BO model);
 
     /**
-     * 批量插入 复用insert
+     * 批量插入 复用save
      */
-    List<DO> saves(List<DO> entities);
+    List<BO> saves(List<BO> models);
 
     /**
      * 更新对象
      */
-    boolean update(DO model);
+    boolean update(BO model);
 
     /**
      * 删除对象
@@ -30,23 +30,23 @@ public interface IService<DO, ID> {
 
     /**
      * 批量删除
-     * 循环复用delete方法
-     * 若仅根据主键按逗号分割 更新数据相同delete方法即可支持
-     * 用次方法目的仅在于复用delete方法更新数据体不同时
+     * 循环复用remove方法
+     * 若仅根据主键按逗号分割 更新数据相同remove方法即可支持
+     * 用次方法目的仅在于复用remove方法更新数据体不同时
      */
     boolean removes(List<ID> id);
 
     /**
      * 查询单个对象
      */
-    DO get(ID id);
+    BO get(ID id);
 
-    List<DO> list(DO model);
+    List<BO> list(BO bo);
 
-    List<DO> list();
+    List<BO> list();
 
     /**
      * 查询分页方法
      */
-    Page<DO> page(DO model, Pageable pageable);
+    Page<BO> page(BO bo, Pageable pageable);
 }

@@ -14,9 +14,9 @@ public interface IBaseRepository<DO, ID> extends Repository<DO, ID> {
 
     <DOs extends DO> List<DOs> saveAllAndFlush(Iterable<DOs> models);
 
-    void deleteById(ID var1);
+    void removeById(ID var1);
 
-    void deleteAllById(Iterable<? extends ID> ids);
+    void removeAllById(Iterable<? extends ID> ids);
 
     DO getReferenceById(ID id);
 

@@ -1,4 +1,4 @@
-package com.dingwd.commons.constraints.domain;
+package com.dingwd.commons.constraints;
 
 
 import java.lang.annotation.Documented;

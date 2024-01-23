@@ -35,7 +35,7 @@ public interface DErrorMessage {
         DErrorMessage NO_TEXT = new MESSAGE("param.error.no.text");
         DErrorMessage ENUM_NOT_EXIST = new MESSAGE("enum.not.exist");
 
-        DErrorMessage ENTITY_NULL = new MESSAGE("param.error.entity.null");
+        DErrorMessage ENTITY_NULL = new MESSAGE("param.error.model.null");
     }
 
     interface SERVICE extends DErrorMessage {

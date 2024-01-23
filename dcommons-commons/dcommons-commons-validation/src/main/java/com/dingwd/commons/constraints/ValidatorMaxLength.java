@@ -1,15 +1,10 @@
-/*
- * Jakarta Bean Validation API
- *
- * License: Apache License, Version 2.0
- * See the license.txt file in the root directory or <http://www.apache.org/licenses/LICENSE-2.0>.
- */
-package com.dingwd.commons.constraints.domain;
+package com.dingwd.commons.constraints;
 
-import com.dingwd.commons.constraints.domain.ValidatorIsDomain.List;
-import com.dingwd.commons.constraints.domain.validators.IsDomainValidator;
+import com.dingwd.commons.constraints.ValidatorMaxLength.List;
+import com.dingwd.commons.constraints.validators.ParamLengthMaxValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
+import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Repeatable;
@@ -19,20 +14,19 @@ import java.lang.annotation.Target;
 import static java.lang.annotation.ElementType.*;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-/**
- * The annotated element must not be {@code null}.
- * Accepts any type.
- *
- * @author Emmanuel Bernard
- */
 @Target({METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER, TYPE_USE})
 @Retention(RUNTIME)
 @Repeatable(List.class)
 @Documented
-@Constraint(validatedBy = IsDomainValidator.class)
-public @interface ValidatorIsDomain {
+@Constraint(validatedBy = ParamLengthMaxValidator.class)
+public @interface ValidatorMaxLength {
 
-    String message() default "d.validator.error.domain";
+    String message() default "d.validator.error.params";
+
+    int value();
+
+
+    boolean equal() default true;
 
     Class<?>[] groups() default {};
 
@@ -42,6 +36,6 @@ public @interface ValidatorIsDomain {
     @Retention(RUNTIME)
     @Documented
     @interface List {
-        ValidatorIsDomain[] value();
+        ValidatorMaxLength[] value();
     }
 }

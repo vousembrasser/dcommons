@@ -1,15 +1,16 @@
-package com.dingwd.commons.validation;
+package com.dingwd.commons.asserts;
 
 
 import com.dingwd.commons.constant.exceptions.DParamException;
 import com.dingwd.commons.constant.exceptions.DServiceException;
 import com.dingwd.commons.constant.messages.DErrorMessage;
+import com.dingwd.commons.validation.CheckFunction;
 import com.dingwd.commons.validation.mail.ValidatorMail;
 
 public class DAssert {
 
     public static void notNil(Object param) {
-        notNil(param, DErrorMessage.IP_ERROR.IP_INVALID);
+        notNil(param, DErrorMessage.PARAM_ERROR.IS_NULL);
     }
 
     public static <T extends DErrorMessage> void notNil(Object param, T message) {

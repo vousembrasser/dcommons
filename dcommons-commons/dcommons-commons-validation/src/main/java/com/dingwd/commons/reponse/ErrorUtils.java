@@ -111,6 +111,6 @@ public class ErrorUtils {
 //    }
 
     public static void main(String[] args) {
-        System.out.println(ErrorUtils.getErrorDesc("ERROR_001"));
+        System.out.println(ErrorUtils.getErrorDesc("test.error"));
     }
 }

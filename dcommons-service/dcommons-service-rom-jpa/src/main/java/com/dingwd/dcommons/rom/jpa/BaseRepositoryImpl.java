@@ -57,22 +57,22 @@ public class BaseRepositoryImpl<T, ID> extends SimpleJpaRepository<T, ID> implem
     }
 
     @Override
-    public <S extends T> S saveAndFlush(S entity) {
-        return super.saveAndFlush(entity);
+    public <S extends T> S saveAndFlush(S model) {
+        return super.saveAndFlush(model);
     }
 
     @Override
-    public <S extends T> List<S> saveAllAndFlush(Iterable<S> entities) {
-        return super.saveAllAndFlush(entities);
+    public <S extends T> List<S> saveAllAndFlush(Iterable<S> models) {
+        return super.saveAllAndFlush(models);
     }
 
     @Override
-    public void deleteById(ID id) {
+    public void removeById(ID id) {
         super.deleteById(id);
     }
 
     @Override
-    public void deleteAllById(Iterable<? extends ID> ids) {
+    public void removeAllById(Iterable<? extends ID> ids) {
         super.deleteAllById(ids);
     }
 
@@ -102,12 +102,12 @@ public class BaseRepositoryImpl<T, ID> extends SimpleJpaRepository<T, ID> implem
 
     @Transactional
     @Override
-    public <S extends T> S updateById(S entity) {
+    public <S extends T> S updateById(S model) {
 
-        Assert.notNull(entity, "Entity must not be null");
-        Assert.notNull(entityInformation.getId(entity), "Entity id must not be null");
+        Assert.notNull(model, "Entity must not be null");
+        Assert.notNull(entityInformation.getId(model), "Entity id must not be null");
 
-        S result = entityManager.merge(entity);
+        S result = entityManager.merge(model);
         flush();
         return result;
     }

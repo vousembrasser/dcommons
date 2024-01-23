@@ -9,7 +9,7 @@ import org.springframework.util.Assert;
 
 import java.util.List;
 
-public abstract class BaserRomService<BO, DO, ID> implements IRomService<BO, DO, ID> {
+public abstract class BaserRomService<DO, ID> implements IRomService<DO, ID> {
 
     @Inject
     private IBaseRepository<DO, ID> dao;
@@ -18,73 +18,56 @@ public abstract class BaserRomService<BO, DO, ID> implements IRomService<BO, DO,
         return (T) dao;
     }
 
-    public abstract DO vo2DO(BO vo, DO source);
-
-    public abstract BO model2BO(DO model, BO source);
-
-    public abstract List<BO> model2BO(List<DO> model);
-
-    public abstract QueryBuild query(BO vo);
-
     @Override
-    public BO insert(BO vo) {
-        DO model = vo2DO(vo, null);
-        model = dao.saveAndFlush(model);
-        return model2BO(model, vo);
+    public DO save(DO model) {
+        return dao.saveAndFlush(model);
     }
 
     @Override
-    public List<BO> inserts(List<BO> vos) {
-        for (BO vo : vos) {
-            Assert.notNull(vo, "The given model must not be null!");
-            DO model = vo2DO(vo, null);
-            model = dao.saveAndFlush(model);
-            model2BO(model, vo);
+    public List<DO> saves(List<DO> models) {
+        for (DO model : models) {
+            Assert.notNull(model, "The given model must not be null!");
+            dao.saveAndFlush(model);
         }
-        return vos;
+        return models;
     }
 
     @Override
-    public BO update(BO vo) {
-        DO model = vo2DO(vo, null);
-        model = dao.updateById(model);
-        return model2BO(model, vo);
+    public DO update(DO model) {
+        return dao.updateById(model);
     }
 
     @Override
-    public boolean delete(ID id) {
-        dao.deleteById(id);
+    public boolean remove(ID id) {
+        dao.removeById(id);
         return true;
     }
 
     @Override
-    public boolean deletes(List<ID> id) {
-        dao.deleteAllById(id);
+    public boolean removes(List<ID> id) {
+        dao.removeAllById(id);
         return true;
     }
 
     @Override
-    public BO get(ID id) {
-        DO model = dao.getReferenceById(id);
-        return model2BO(model, null);
+    public DO get(ID id) {
+        return dao.getReferenceById(id);
     }
 
     @Override
-    public List<BO> list(BO vo) {
-        List<DO> entities = dao.findAll(query(vo));
-        return model2BO(entities);
+    public List<DO> list(QueryBuild queryBuild) {
+        return dao.findAll(queryBuild);
     }
 
     @Override
-    public List<BO> list() {
-        List<DO> entities = dao.findAll();
-        return model2BO(entities);
+    public List<DO> list() {
+        return dao.findAll();
     }
 
     @Override
-    public Page<BO> page(BO vo, Pageable pageable) {
-        Page<DO> modelPage = dao.findAll(query(vo), pageable);
+    public Page<DO> page(QueryBuild queryBuild, Pageable pageable) {
+        Page<DO> modelPage = dao.findAll(queryBuild, pageable);
         List<DO> list = modelPage.stream().toList();
-        return new PageImpl<>(model2BO(list), pageable, modelPage.getTotalElements());
+        return new PageImpl<>(list, pageable, modelPage.getTotalElements());
     }
 }

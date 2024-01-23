@@ -9,7 +9,7 @@ public interface InsertService<T, ID> {
       *
       * @param record 要添加的数据
       * @return 添加后生成的主键
-      */T insert(T record);
+      */T save(T record);
 
-    List<T> insert(Iterable<T> records);
+    List<T> save(Iterable<T> records);
  }

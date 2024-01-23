@@ -1,9 +1,10 @@
-package com.dingwd.commons.constraints.domain;
+package com.dingwd.commons.constraints;
 
-import com.dingwd.commons.constraints.domain.ValidatorParamLength.List;
-import com.dingwd.commons.constraints.domain.validators.ParamLengthValidator;
+import com.dingwd.commons.constraints.ValidatorMinLength.List;
+import com.dingwd.commons.constraints.validators.ParamLengthMinValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
+import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Repeatable;
@@ -17,21 +18,14 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Repeatable(List.class)
 @Documented
-@Constraint(validatedBy = ParamLengthValidator.class)
-public @interface ValidatorParamLength {
+@Constraint(validatedBy = ParamLengthMinValidator.class)
+public @interface ValidatorMinLength {
 
-    String message() default "d.validator.error.length";
+    String message() default "d.validator.error.params";
 
-    /**
-     * max = -1 不检查
-     */
-    int max() default 10;
+    int value();
 
-    /**
-     * min = -1 不检查
-     */
-    int min() default 0;
-
+    boolean equal() default true;
 
     Class<?>[] groups() default {};
 
@@ -41,6 +35,6 @@ public @interface ValidatorParamLength {
     @Retention(RUNTIME)
     @Documented
     @interface List {
-        ValidatorParamLength[] value();
+        ValidatorMinLength[] value();
     }
 }
