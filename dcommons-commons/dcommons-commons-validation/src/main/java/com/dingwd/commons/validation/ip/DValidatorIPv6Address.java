@@ -1,6 +1,7 @@
 package com.dingwd.commons.validation.ip;
 
-import com.dingwd.commons.constant.utils.ip.IPAddressUtil;
+
+import com.dingwd.commons.util.ip.IPAddressUtil;
 
 import java.math.BigInteger;
 import java.net.InetAddress;
