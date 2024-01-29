@@ -4,8 +4,7 @@ package com.dingwd.commons.asserts;
 import com.dingwd.commons.constant.exceptions.DParamException;
 import com.dingwd.commons.constant.exceptions.DServiceException;
 import com.dingwd.commons.constant.messages.DErrorMessage;
-import com.dingwd.commons.validation.CheckFunction;
-import com.dingwd.commons.validation.mail.ValidatorMail;
+import com.dingwd.commons.validation.mail.DValidatorMail;
 
 public class DAssert {
 
@@ -42,7 +41,7 @@ public class DAssert {
         if (mail == null || mail.isBlank()) {
             throw new DParamException(DErrorMessage.PARAM_ERROR.IS_NULL);
         }
-        if (!ValidatorMail.isMail(mail)) {
+        if (!DValidatorMail.isMail(mail)) {
             throw new DParamException(DErrorMessage.PARAM_ERROR.PARAM_IS_INVALID);
         }
     }

@@ -17,7 +17,7 @@
 package com.dingwd.commons.validation.collection;
 
 
-import com.dingwd.commons.validation.param.ValidatorObject;
+import com.dingwd.commons.validation.param.DValidatorObject;
 
 import java.util.*;
 
@@ -30,7 +30,7 @@ import java.util.*;
  * @author Arjen Poutsma
  * @since 1.1.3
  */
-public abstract class ValidatorCollection {
+public abstract class DValidatorCollection {
 
 
     /**
@@ -66,7 +66,7 @@ public abstract class ValidatorCollection {
         if (iterator != null) {
             while (iterator.hasNext()) {
                 Object candidate = iterator.next();
-                if (ValidatorObject.nullSafeEquals(candidate, element)) {
+                if (DValidatorObject.nullSafeEquals(candidate, element)) {
                     return true;
                 }
             }
@@ -85,7 +85,7 @@ public abstract class ValidatorCollection {
         if (enumeration != null) {
             while (enumeration.hasMoreElements()) {
                 Object candidate = enumeration.nextElement();
-                if (ValidatorObject.nullSafeEquals(candidate, element)) {
+                if (DValidatorObject.nullSafeEquals(candidate, element)) {
                     return true;
                 }
             }

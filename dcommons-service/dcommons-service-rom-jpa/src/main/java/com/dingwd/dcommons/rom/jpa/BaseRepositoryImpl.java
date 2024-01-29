@@ -26,6 +26,7 @@ import org.springframework.util.Assert;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.BiConsumer;
 
 import static org.springframework.data.jpa.repository.query.QueryUtils.toOrders;
@@ -77,8 +78,8 @@ public class BaseRepositoryImpl<T, ID> extends SimpleJpaRepository<T, ID> implem
     }
 
     @Override
-    public T getReferenceById(ID id) {
-        return super.getReferenceById(id);
+    public Optional<T> findById(ID id) {
+        return super.findById(id);
     }
 
     //    @Override

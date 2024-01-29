@@ -51,7 +51,7 @@ public abstract class BaserRomService<DO, ID> implements IRomService<DO, ID> {
 
     @Override
     public DO get(ID id) {
-        return dao.getReferenceById(id);
+        return dao.findById(id).orElse(null);
     }
 
     @Override

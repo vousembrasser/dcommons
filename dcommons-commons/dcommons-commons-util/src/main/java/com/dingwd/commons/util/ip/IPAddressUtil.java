@@ -1,4 +1,4 @@
-package com.dingwd.commons.constant.utils.ip;
+package com.dingwd.commons.util.ip;
 
 public class IPAddressUtil {
     private static final int INADDR4SZ = 4;

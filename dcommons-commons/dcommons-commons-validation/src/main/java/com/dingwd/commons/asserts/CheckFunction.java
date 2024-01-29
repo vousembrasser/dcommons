@@ -1,4 +1,4 @@
-package com.dingwd.commons.validation;
+package com.dingwd.commons.asserts;
 
 @FunctionalInterface
 public interface CheckFunction {

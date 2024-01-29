@@ -1,7 +1,7 @@
 package com.dingwd.commons.constraints.validators;
 
 import com.dingwd.commons.constraints.ValidatorMinLength;
-import com.dingwd.commons.validation.param.ValidatorString;
+import com.dingwd.commons.validation.param.DValidatorString;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.hibernate.validator.internal.engine.constraintvalidation.ConstraintValidatorContextImpl;
@@ -44,6 +44,6 @@ public class ParamLengthMinValidator implements ConstraintValidator<ValidatorMin
         if (min == null) {
             return false;
         }
-        return ValidatorString.lengthMin(param, min);
+        return DValidatorString.lengthMin(param, min);
     }
 }

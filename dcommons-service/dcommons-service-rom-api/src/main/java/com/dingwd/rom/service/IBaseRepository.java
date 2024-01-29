@@ -7,6 +7,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @NoRepositoryBean
 public interface IBaseRepository<DO, ID> extends Repository<DO, ID> {
@@ -18,7 +19,7 @@ public interface IBaseRepository<DO, ID> extends Repository<DO, ID> {
 
     void removeAllById(Iterable<? extends ID> ids);
 
-    DO getReferenceById(ID id);
+    Optional<DO> findById(ID id);
 
     List<DO> findAll(QueryBuild predicates);
     List<DO> findAll();

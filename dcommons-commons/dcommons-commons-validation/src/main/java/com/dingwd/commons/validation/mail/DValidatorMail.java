@@ -3,7 +3,7 @@ package com.dingwd.commons.validation.mail;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ValidatorMail {
+public class DValidatorMail {
 
     private static final String regex = "^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\\.[a-zA-Z0-9_-]+)+$";
 

@@ -38,7 +38,7 @@ import java.util.Optional;
  * @author Sam Brannen
  * @since 19.03.2004
  */
-public abstract class ValidatorObject {
+public abstract class DValidatorObject {
 
 
     /**
@@ -114,7 +114,7 @@ public abstract class ValidatorObject {
      * @param obj the object to check
      * @return {@code true} if the object is {@code null} or <em>empty</em>
      * @see Optional#isPresent()
-     * @see ValidatorObject#isEmpty(Object[])
+     * @see DValidatorObject#isEmpty(Object[])
      * @since 4.2
      */
     public static boolean isEmpty(Object obj) {

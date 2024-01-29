@@ -1,7 +1,7 @@
 package com.dingwd.commons.constraints.validators;
 
 import com.dingwd.commons.constraints.ValidatorMaxLength;
-import com.dingwd.commons.validation.param.ValidatorString;
+import com.dingwd.commons.validation.param.DValidatorString;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import org.hibernate.validator.internal.engine.constraintvalidation.ConstraintValidatorContextImpl;
@@ -45,6 +45,6 @@ public class ParamLengthMaxValidator implements ConstraintValidator<ValidatorMax
         if (max == null) {
             return false;
         }
-        return ValidatorString.lengthMax(param, max);
+        return DValidatorString.lengthMax(param, max);
     }
 }

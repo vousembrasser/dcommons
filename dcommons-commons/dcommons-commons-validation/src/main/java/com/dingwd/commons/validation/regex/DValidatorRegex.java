@@ -67,7 +67,7 @@ import java.util.regex.Pattern;
  *
  * @since 1.4
  */
-public class ValidatorRegex implements Serializable {
+public class DValidatorRegex implements Serializable {
 
     private static final long serialVersionUID = -8832409930574867162L;
 
@@ -80,7 +80,7 @@ public class ValidatorRegex implements Serializable {
      * @param regexs The set of regular expressions this validator will
      * validate against
      */
-    ValidatorRegex(final List<String> regexs) {
+    DValidatorRegex(final List<String> regexs) {
         this(regexs.toArray(new String[] {}), true);
     }
 
@@ -91,7 +91,7 @@ public class ValidatorRegex implements Serializable {
      * @param regex The regular expression this validator will
      * validate against
      */
-    public ValidatorRegex(final String regex) {
+    public DValidatorRegex(final String regex) {
         this(regex, true);
     }
 
@@ -102,7 +102,7 @@ public class ValidatorRegex implements Serializable {
      * @param regexs The set of regular expressions this validator will
      * validate against
      */
-    public ValidatorRegex(final String... regexs) {
+    public DValidatorRegex(final String... regexs) {
         this(regexs, true);
     }
 
@@ -115,7 +115,7 @@ public class ValidatorRegex implements Serializable {
      * @param caseSensitive when {@code true} matching is <i>case
      * sensitive</i>, otherwise matching is <i>case in-sensitive</i>
      */
-    public ValidatorRegex(final String regex, final boolean caseSensitive) {
+    public DValidatorRegex(final String regex, final boolean caseSensitive) {
         this(new String[] { regex }, caseSensitive);
     }
 
@@ -128,7 +128,7 @@ public class ValidatorRegex implements Serializable {
      * @param caseSensitive when {@code true} matching is <i>case
      * sensitive</i>, otherwise matching is <i>case in-sensitive</i>
      */
-    public ValidatorRegex(final String[] regexs, final boolean caseSensitive) {
+    public DValidatorRegex(final String[] regexs, final boolean caseSensitive) {
         if (regexs == null || regexs.length == 0) {
             throw new IllegalArgumentException("Regular expressions are missing");
         }

@@ -17,7 +17,7 @@
 package com.dingwd.commons.validation.domain;
 
 
-import com.dingwd.commons.validation.regex.ValidatorRegex;
+import com.dingwd.commons.validation.regex.DValidatorRegex;
 
 import java.io.Serializable;
 import java.net.IDN;
@@ -64,10 +64,10 @@ import java.util.Locale;
  *
  * @since 1.4
  */
-public class ValidatorDomain implements Serializable {
+public class DValidatorDomain implements Serializable {
 
     /**
-     * enum used by {@link ValidatorDomain#updateTLDOverride(ArrayType, String[])}
+     * enum used by {@link DValidatorDomain#updateTLDOverride(ArrayType, String[])}
      * to determine which override array to update / fetch
      *
      * @since 1.5.0
@@ -158,13 +158,13 @@ public class ValidatorDomain implements Serializable {
          * Singleton instance of this validator, which
          * doesn't consider local addresses as valid.
          */
-        private static final ValidatorDomain DOMAIN_VALIDATOR = new ValidatorDomain(false);
+        private static final DValidatorDomain DOMAIN_VALIDATOR = new DValidatorDomain(false);
 
         /**
          * Singleton instance of this validator, which does
          * consider local addresses valid.
          */
-        private static final ValidatorDomain DOMAIN_VALIDATOR_WITH_LOCAL = new ValidatorDomain(true);
+        private static final DValidatorDomain DOMAIN_VALIDATOR_WITH_LOCAL = new DValidatorDomain(true);
 
     }
 
@@ -1843,7 +1843,7 @@ public class ValidatorDomain implements Serializable {
      *
      * @return the singleton instance of this validator
      */
-    public static synchronized ValidatorDomain getInstance() {
+    public static synchronized DValidatorDomain getInstance() {
         inUse = true;
         return LazyHolder.DOMAIN_VALIDATOR;
     }
@@ -1855,7 +1855,7 @@ public class ValidatorDomain implements Serializable {
      * @param allowLocal Should local addresses be considered valid?
      * @return the singleton instance of this validator
      */
-    public static synchronized ValidatorDomain getInstance(final boolean allowLocal) {
+    public static synchronized DValidatorDomain getInstance(final boolean allowLocal) {
         inUse = true;
         if (allowLocal) {
             return LazyHolder.DOMAIN_VALIDATOR_WITH_LOCAL;
@@ -1877,9 +1877,9 @@ public class ValidatorDomain implements Serializable {
      * @return an instance of this validator
      * @since 1.7
      */
-    public static synchronized ValidatorDomain getInstance(final boolean allowLocal, final List<Item> items) {
+    public static synchronized DValidatorDomain getInstance(final boolean allowLocal, final List<Item> items) {
         inUse = true;
-        return new ValidatorDomain(allowLocal, items);
+        return new DValidatorDomain(allowLocal, items);
     }
 
     /**
@@ -1992,7 +1992,7 @@ public class ValidatorDomain implements Serializable {
      * <p>
      * For example:
      * <p>
-     * {@code ValidatorDomain.updateTLDOverride(ArrayType.GENERIC_PLUS, "apache")}
+     * {@code DValidatorDomain.updateTLDOverride(ArrayType.GENERIC_PLUS, "apache")}
      * <p>
      * To clear an override array, provide an empty array.
      *
@@ -2071,17 +2071,17 @@ public class ValidatorDomain implements Serializable {
     // .um  country-code    Not assigned
 
     /**
-     * ValidatorRegex for matching domains.
+     * DValidatorRegex for matching domains.
      */
-    private final ValidatorRegex domainRegex =
-            new ValidatorRegex(DOMAIN_NAME_REGEX);
+    private final DValidatorRegex domainRegex =
+            new DValidatorRegex(DOMAIN_NAME_REGEX);
 
     /**
-     * ValidatorRegex for matching a local hostname
+     * DValidatorRegex for matching a local hostname
      */
     // RFC1123 sec 2.1 allows hostnames to start with a digit
-    private final ValidatorRegex hostnameRegex =
-            new ValidatorRegex(DOMAIN_LABEL_REGEX);
+    private final DValidatorRegex hostnameRegex =
+            new DValidatorRegex(DOMAIN_LABEL_REGEX);
 
     /**
      * Local override.
@@ -2123,7 +2123,7 @@ public class ValidatorDomain implements Serializable {
     /**
      * Private constructor.
      */
-    private ValidatorDomain(final boolean allowLocal) {
+    private DValidatorDomain(final boolean allowLocal) {
         this.allowLocal = allowLocal;
         // link to class overrides
         myCountryCodeTLDsMinus = countryCodeTLDsMinus;
@@ -2139,7 +2139,7 @@ public class ValidatorDomain implements Serializable {
      *
      * @since 1.7
      */
-    private ValidatorDomain(final boolean allowLocal, final List<Item> items) {
+    private DValidatorDomain(final boolean allowLocal, final List<Item> items) {
         this.allowLocal = allowLocal;
 
         // default to class overrides

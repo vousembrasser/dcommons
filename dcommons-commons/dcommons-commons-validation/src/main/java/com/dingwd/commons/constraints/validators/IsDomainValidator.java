@@ -1,7 +1,7 @@
 package com.dingwd.commons.constraints.validators;
 
 import com.dingwd.commons.constraints.ValidatorIsDomain;
-import com.dingwd.commons.validation.domain.ValidatorDomain;
+import com.dingwd.commons.validation.domain.DValidatorDomain;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
@@ -18,7 +18,7 @@ public class IsDomainValidator implements ConstraintValidator<ValidatorIsDomain,
             boolean allTrue = true;
             for (Object o : iterableDomain) {
                 if (o instanceof String) {
-                    boolean check = ValidatorDomain.getInstance().isValid((String) o);
+                    boolean check = DValidatorDomain.getInstance().isValid((String) o);
                     if (!check) {
                         allTrue = false;
                     }
@@ -28,7 +28,7 @@ public class IsDomainValidator implements ConstraintValidator<ValidatorIsDomain,
             }
             return allTrue;
         } else if (domain instanceof String) {
-            return ValidatorDomain.getInstance().isValid((String) domain);
+            return DValidatorDomain.getInstance().isValid((String) domain);
         }
         return false;
     }
